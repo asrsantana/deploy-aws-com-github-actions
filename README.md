@@ -8,6 +8,10 @@
 - [**Configuração do Backend Remoto para Armazenamento do Estado**](@Configuracao-do-Backend-Remoto)
 - [**Exemplo de payload do SQS**](#Exemplo-de-payload-do-SQS)
 
+**Importante!!!** Após criar o repositório, não esquecer de criar as variáveis secrets para as credenciais. 
+Consulte [**aqui**](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html) como utilizar a autenticação via OpenID Connect (OIDC) dado que é mais seguro.
+
+
 # Instalação e Uso do AWS CLI no Windows
 
 Este guia descreve os passos para instalar e configurar a AWS Command Line Interface (AWS CLI) em um ambiente Windows.
@@ -356,3 +360,4 @@ backend "s3" {
 }
 
 ```
+ 
