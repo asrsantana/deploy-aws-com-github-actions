@@ -319,12 +319,12 @@ backend "s3" {
 }
 ```
 
-**onde**:
-  *bucket*: nome do bucket S3 onde o estado será salvo.  
-  *key*: caminho do arquivo .tfstate dentro do bucket.  
-  *region*: região AWS onde está o bucket e o DynamoDB.  
-  *encrypt*: habilita criptografia do arquivo de estado em repouso no S3.  
-  *dynamodb_table*: nome da tabela do DynamoDB usada para fazer locking do state file e evitar condições de corrida (duas execuções concorrentes).  
+**onde**:  
+  **bucket**: nome do bucket S3 onde o estado será salvo.  
+  **key**: caminho do arquivo .tfstate dentro do bucket.  
+  **region**: região AWS onde está o bucket e o DynamoDB.  
+  **encrypt**: habilita criptografia do arquivo de estado em repouso no S3.  
+  **dynamodb_table**: nome da tabela do DynamoDB usada para fazer locking do state file e evitar condições de corrida (duas execuções concorrentes).  
   
 # Exemplo de payload do SQS
 
