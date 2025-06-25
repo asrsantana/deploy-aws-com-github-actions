@@ -1,0 +1,53 @@
+name: Infra
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    env:
+      TF_WORKING_DIR: infra
+      TF_LAMBDA_DIR: src
+      TF_LAMBDA_ZIP: infra/zip_files/lambda.zip
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ env.TF_WORKING_DIR }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.5.7
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: compact lambda function
+        run: |
+          echo "Compacting Lambda function..."
+          mkdir -p zip_files
+          cd ../${{ env.TF_LAMBDA_DIR }}
+          zip -r ../infra/zip_files/lambda.zip .
+
+      - name: Init Terraform
+        run: terraform init
+
+      - name: Plan Terraform
+        run: terraform plan
+
+      # - name: Destroy Terraform
+      #   run: terraform destroy -auto-approve
+
+      - name: Apply Terraform
+        run: terraform apply -auto-approve
