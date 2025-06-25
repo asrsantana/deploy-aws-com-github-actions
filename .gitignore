@@ -6,7 +6,6 @@
 *.tfstate.*
 
 infra/zip_files
-.github
 
 # Crash log files
 crash.log
